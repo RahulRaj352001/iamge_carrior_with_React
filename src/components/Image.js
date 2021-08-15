@@ -4,7 +4,7 @@ export default function Image({image, index,handleDelete}) {
     const [ishover, setishover] = useState(false);
 
     return (
-        <div className="w-1/3 my-4 flex justify-center" key={index}>
+        <div className=" w-1/4 p-1 border  flex justify-center" key={index}>
         <div
           className="relative "
           onMouseEnter={() => setishover(true)}
@@ -13,7 +13,7 @@ export default function Image({image, index,handleDelete}) {
               ishover ? "" : "hidden"
             } hover:opacity-90 `}
             onClick={() => handleDelete(index)} > </i>
-          <img alt="" src={image} width="150" />
+          <img alt="" src={image} width="100%" />
         </div>
       </div>
     )
