@@ -1,21 +1,21 @@
 import React from "react";
-import Images from "./components/Images";
 import "./css/style.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-
+import Routes from "./utils/Routes";
+import Header from "./components/Header";
 
 export default function App(props) {
- 
-  
-
   return (
-    <section className="flex justify-center">
-      <div className="w-10/12">
-        <div className=" text-center">
-          
-         <Images/>
-        </div>
-      </div>
-    </section>
+    <Router>
+       <Header/>
+      <Switch>
+        {Routes.map((route,index) => (
+          <Route key={index} path={route.path} exact={route.exact}>
+            {route.component}
+          </Route>
+        ))}
+      </Switch>
+    </Router>
   );
 }
