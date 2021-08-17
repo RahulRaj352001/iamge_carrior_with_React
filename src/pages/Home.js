@@ -5,7 +5,8 @@ export default function Home() {
     <div className="w-10/12">
       <div className=" text-center">
         welcome Home
-      </div>
+        </div>
+        
     </div>
   </section>
 }
