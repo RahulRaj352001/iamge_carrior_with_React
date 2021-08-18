@@ -1,45 +1,72 @@
-import React, { useEffect,useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import firebase from "../config/Firebase";
+import appContext from "../store/AppContext";
 export default function Header() {
   const history = useHistory();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        setIsLoggedIn(true);
-      }
-    });
-  }, []);
+  const [isLoggedIn, user] = useContext(appContext);
   function handleClick() {
-    firebase.auth().signOut().then((res) => {
-      history.replace("/login")
-      setIsLoggedIn(false)
-    }).catch((e) => {
-      console.log(e.response.data);
-    })
+    firebase
+      .auth()
+      .signOut()
+      .then((res) => {
+        history.replace("/login");
+      })
+      .catch((e) => {
+        console.log(e.response.data);
+      });
   }
   return (
-    <nav>
-      <div className=" border  bg-gray-500 text-yellow-300">
-        <ul className="flex  justify-between m-2 ">
-          <li className="p-2 left-2 font-medium">
-            <Link to="/">Home</Link>
+    <nav className=" border flex justify-between bg-gray-500 text-yellow-300">
+      <ul className="flex  justify-between m-2 ">
+        <li className="p-2 left-2 font-medium">
+          <NavLink
+            to="/"
+            exact={true}
+            activeClassName="underline text-blue-300"
+          >
+            Home
+          </NavLink>
+        </li>
+        <li className="p-2 left-2 font-medium">
+          <NavLink
+            to="/gallery"
+            exact
+            activeClassName="underline text-blue-300"
+          >
+            Gallery
+          </NavLink>
+        </li>
+      </ul>
+      <ul className=" flex  justify-between m-2">
+        <li className="p-2 left-2 font-medium">
+          {isLoggedIn ? (
+            <button onClick={handleClick}> logout</button>
+          ) : (
+            <NavLink
+              to="/login"
+              exact
+              activeClassName="underline text-blue-300"
+            >
+              Login
+            </NavLink>
+          )}
           </li>
-          <li className="p-2 left-2 font-medium">
-            <Link to="/gallery">Gallery</Link>
-          </li>
-          <li className="p-2 left-2 font-medium">
-            {isLoggedIn ? (
-              <button onClick={handleClick}> logout</button>
-            ) : (
-              <Link to="/login">login</Link>
-            )}
-          </li>
-        </ul>
-      </div>
+        <li className="p-2 left-2 font-medium">
+          {!isLoggedIn && (
+            
+            <NavLink
+              to="/signup"
+              exact
+              activeClassName="underline text-blue-300"
+            >
+              Signup
+            </NavLink>
+          )}
+        </li>
+      </ul>
     </nav>
   );
 }
