@@ -31,11 +31,10 @@ export default function Login() {
       });
   }
   function handleInput(e) {
-   setForm({...form,[e.target.name]:e.target.value})
+    setForm({ ...form, [e.target.name]: e.target.value })
+   
   }
-  // if (isLoggedIn ) {
-  //   return <Redirect to="/" />
-  // }
+ 
   return (
     <section className="flex justify-center">
       <div className="flex h-screen w-1/2 bg-gray-100">
