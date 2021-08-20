@@ -67,9 +67,9 @@ export default function App(props) {
               </Route>
             );
           })}
-          <Route key="*"  >
-             <Notfound/>
-              </Route>
+          <Route key="*">
+            <Notfound />
+          </Route>
         </Switch>
       </appContext.Provider>
     </Router>
