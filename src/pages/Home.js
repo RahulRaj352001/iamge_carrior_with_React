@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import React from "react";
-import { Transition } from "vue";
+
 
 export default function Home() {
   return (
