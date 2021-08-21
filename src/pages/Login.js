@@ -32,7 +32,7 @@ export default function Login() {
   }
   function handleInput(e) {
     setForm({ ...form, [e.target.name]: e.target.value })
-   
+    e.preventDefault();
   }
  
   return (

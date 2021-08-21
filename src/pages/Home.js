@@ -7,8 +7,8 @@ export default function Home() {
     <section className="flex h-screen justify-center">
       <div className="w-10/12 m-auto">
         <motion.h1
-          initial={{opacity:0 ,y:-400 }}
-          animate={{ scale: 1.5 ,opacity:1,y:-50, transition:{duration:1.5}}}
+          // initial={{opacity:0 ,y:-400 }}
+          // animate={{ scale: 1.5 ,opacity:1,y:-50, transition:{duration:1.5}}}
           className="m-auto font-bold text-3xl text-center"
         >
           welcome Home

@@ -1,3 +1,4 @@
+import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import useDebounce from "../utils/hooks/useDebounce";
@@ -21,22 +22,49 @@ export default function Images() {
   }
 
   function ShowImage() {
+    const [showPreview, setShowPreview] = useState(false);
+
     return (
-      <InfiniteScroll
-        dataLength={Images.length}
-        next={() => setPage(page + 1)}
-        hasMore={true}
-        className="flex flex-wrap"
-      >
-        {Images.map((img, index) => (
-          <Image
-            key={index}
-            image={img.urls.full}
-            index={index}
-            handleDelete={handleDelete}
-          />
-        ))}
-      </InfiniteScroll>
+      <AnimateSharedLayout type="switch">
+        <InfiniteScroll 
+          dataLength={Images.length}
+          next={() => setPage(page + 1)}
+          hasMore={true}
+          className="flex flex-wrap"
+        >
+          {Images.map((img, index) => (
+            <motion.div
+              className=" w-1/5 p-1 border  flex justify-center"
+              key={index}
+              layoutId={img.urls.full}
+            
+            >
+              <Image
+                show={() => setShowPreview(img.urls.full)}
+                image={img.urls.full}
+                index={index}
+                handleDelete={handleDelete}
+              />
+            </motion.div>
+          ))}
+        </InfiniteScroll>
+        <AnimatePresence>
+          {showPreview && (
+            <motion.section
+              layoutId={showPreview}
+              
+              exit={{ opacity: 0, rotate: 360, transition: { duration: 1 } }}
+
+              className=" fixed  z-20 left-0  top-0 flex justify-center items-center  w-full h-full"
+              onClick={() => setShowPreview(false)}
+            >
+              <div className="bg-white">
+                <img alt="" src={showPreview} width="300" />
+              </div>
+            </motion.section>
+          )}
+        </AnimatePresence>
+      </AnimateSharedLayout>
     );
   }
   const Debounce = useDebounce();
