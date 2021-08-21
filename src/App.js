@@ -25,7 +25,7 @@ export default function App(props) {
         setIsLoggedIn(true);
         setuser(user);
         setIsLoading(false);
-        console.log(user);
+      
       } else {
         setIsLoggedIn(false);
         setuser({});

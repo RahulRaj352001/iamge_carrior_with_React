@@ -21,10 +21,33 @@ export default function Images() {
     ]);
   }
 
-  function ShowImage() {
+ 
     const [showPreview, setShowPreview] = useState(false);
 
-    return (
+    
+  
+  const Debounce = useDebounce();
+  function handleInput(e) {
+    const text = e.target.value;
+    Debounce(() => setSearchItem(text), 1000);
+  }
+
+  return (
+    <section>
+      <div className="my-5">
+        <input
+          className="w-full p-2 rounded shadow border-2"
+          type="text"
+          onChange={handleInput}
+          placeholder="search photo here "
+        />
+      </div>
+      {errors.length > 0 && (
+        <div className="flex h-screen">
+          <p className="m-auto">{errors[0]}</p>
+        </div>
+      )}
+      
       <AnimateSharedLayout type="switch">
         <InfiniteScroll 
           dataLength={Images.length}
@@ -66,29 +89,6 @@ export default function Images() {
         </AnimatePresence>
       </AnimateSharedLayout>
     );
-  }
-  const Debounce = useDebounce();
-  function handleInput(e) {
-    const text = e.target.value;
-    Debounce(() => setSearchItem(text), 1000);
-  }
-
-  return (
-    <section>
-      <div className="my-5">
-        <input
-          className="w-full p-2 rounded shadow border-2"
-          type="text"
-          onChange={handleInput}
-          placeholder="search photo here "
-        />
-      </div>
-      {errors.length > 0 && (
-        <div className="flex h-screen">
-          <p className="m-auto">{errors[0]}</p>
-        </div>
-      )}
-      <ShowImage />
 
       {isLoading && <Loading />}
     </section>

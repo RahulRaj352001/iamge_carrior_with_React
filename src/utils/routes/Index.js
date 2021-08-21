@@ -3,6 +3,7 @@ import Gallery from "../../pages/Gallery";
 import Home from "../../pages/Home";
 import Login from "../../pages/Login";
 import SignUp from "../../pages/SignUp";
+import Tensorflow from "../../pages/Tensorflow";
  
 
 export default  [
@@ -31,6 +32,13 @@ export default  [
     exact: true,
     component: () => <SignUp />,
     protected:"guest"
+
+  },
+  {
+    path: "/tensorflow",
+    exact: true,
+    component: () => <Tensorflow />,
+    protected:null
 
   }
 ]
