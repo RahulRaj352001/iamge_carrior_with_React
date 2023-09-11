@@ -16,7 +16,8 @@
 //         .then((res) => {
 //           if (page>1) {
               
-//               setImages([ ...Images,...res.data.results]);
+//               setImages([...res.data.results]);
+                 
 //             } else {
 //               setImages([...res.data.results]);
               
